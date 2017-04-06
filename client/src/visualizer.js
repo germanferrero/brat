@@ -3385,15 +3385,16 @@ Util.profileStart('before render');
         $.each(response_types, function(aTypeNo, aType) {
           processed[aType.type] = aType;
           // count the values; if only one, it's a boolean attribute
-          if (aType.values.length == 1) {
-            aType.bool = aType.values[0].name;
+          var values = Object.keys(aType.values);
+          if (values.length == 1) {
+            aType.bool = values[0];
           }
           // We need attribute values to be stored as an array, in the correct order,
           // but for efficiency of access later we also create a map of each value 
           // name to the corresponding value dictionary.
           aType.values.byName = {}
           $.each(aType.values, function(valueNo, val) {
-              aType.values.byName[val.name] = val;
+              aType.values.byName[valueNo] = val;
           });
         });
         return processed;
